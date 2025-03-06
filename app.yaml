@@ -1,0 +1,22 @@
+name: deepseek-web-crawler-api
+region: nyc
+services:
+  - name: api
+    github:
+      repo: goodgains-dev/convert-gg-api
+      branch: main
+    dockerfile_path: Dockerfile
+    http_port: 8000
+    instance_size_slug: basic-xs
+    instance_count: 1
+    routes:
+      - path: /
+    envs:
+      - key: GROQ_API_KEY
+        scope: RUN_TIME
+        value: ${GROQ_API_KEY}
+      - key: API_KEY
+        scope: RUN_TIME
+        value: ${API_KEY}
+    health_check:
+      http_path: /docs

@@ -293,6 +293,29 @@ If you encounter issues:
 3. Try the test configuration first to verify basic functionality
 4. Check the terminal output for detailed error messages
 
+## API Usage
+
+The DeepSeek Web Crawler can be used as an API. To start the API locally:
+
+```bash
+uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Then you can access the API documentation at http://localhost:8000/docs
+
+### API Endpoints
+
+- `GET /configs`: List all available predefined configurations
+- `POST /crawl`: Crawl a website using either a predefined configuration or a custom configuration
+
+### API Authentication
+
+The API is protected with an API key. You need to include the API key in the `X-API-Key` header for all requests.
+
+## Deployment
+
+You can deploy the DeepSeek Web Crawler API to Digital Ocean App Platform. See the [DEPLOY.md](DEPLOY.md) file for detailed instructions.
+
 ## License
 
 See LICENSE file for details.

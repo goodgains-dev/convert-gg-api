@@ -81,17 +81,15 @@ CONFIGS = {
     },
     "test": {
         **DEFAULT_CONFIG,
-        "BASE_URL": "file:///" + os.path.abspath("test.html").replace("\\", "/"),
-        "CSS_SELECTOR": "div.item-card",
+        "BASE_URL": "file:///" + os.path.abspath("test_products.html").replace("\\", "/"),
+        "CSS_SELECTOR": "div.product",
         "REQUIRED_KEYS": [
-            "name",
-            "description",
-            "location",
-            "rating"
+            "title",
+            "price",
+            "url"
         ],
         "OPTIONAL_KEYS": [
-            "phone",
-            "website"
+            "description"
         ],
         "CRAWLER_CONFIG": {
             **DEFAULT_CONFIG["CRAWLER_CONFIG"],
@@ -102,19 +100,17 @@ CONFIGS = {
         "LLM_CONFIG": {
             **DEFAULT_CONFIG["LLM_CONFIG"],
             "INSTRUCTION": """
-            Extract information from each item card. For each item, find:
+            Extract information from each product. For each item, find:
 
             Required information:
-            - Name: The title of the item (h2 text)
-            - Description: The description text
-            - Location: The location text
-            - Rating: The numerical rating
+            - Title: The product title (h2.title text)
+            - Price: The price text
+            - URL: The product URL (a.url href)
 
             Additional information if present:
-            - Phone number
-            - Website URL
+            - Description: The product description
 
-            Extract this information for each item card found in the content.
+            Extract this information for each product found in the content.
             """
         }
     }
